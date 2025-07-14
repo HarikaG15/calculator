@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Simple Calculator</title>
+  <style>
+    /* Global styles for body */
+    body {
+      background-color: #008B8B; /* Teal page background */
+      font-family: Arial, sans-serif;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+    }
+
+    /* Calculator box styling */
+    .calculator {
+      background-color: #FFFACD; /* LemonChiffon background for calculator */
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 30px 14px 11px rgba(0, 0, 0, 0.2);
+      width: 80%;
+      max-width: 400px;
+    }
+
+    /* Display area styling */
+    .display {
+      background-color: #FFF5EE; /* Seashell background for the expression area */
+      color: #000; /* Black text color for the display */
+      width: 100%;
+      height: 50px;
+      font-size: 24px;
+      text-align: right;
+      margin-bottom: 10px;
+      padding: 10px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      box-sizing: border-box;
+    }
+
+    /* Button grid layout */
+    .buttons {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 10px;
+    }
+
+    /* General button styling */
+    button {
+      padding: 15px;
+      font-size: 18px;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      background-color: #e0e0e0;
+      transition: background-color 0.3s;
+    }
+
+    /* Hover effect for buttons */
+    button:hover {
+      background-color: #d5d5d5;
+    }
+
+    /* Operator button styles */
+    .operator {
+      background-color: #C71585; /* Medium violet red */
+      color: white;
+    }
+
+    .operator:hover {
+      background-color: #e08900; /* Darker shade of orange */
+    }
+
+    /* Equal button styles */
+    .equal {
+      background-color: #228B22; /* Forest Green */
+      color: white;
+    }
+
+    .equal:hover {
+      background-color: #28a745;
+    }
+
+    /* Clear button styles */
+    .clear {
+      background-color: #ff3b30; /* Red */
+      color: white;
+    }
+
+    .clear:hover {
+      background-color: #e02a20;
+    }
+
+    /* Media Queries for Mobile */
+    @media screen and (max-width: 768px) {
+      /* Adjust calculator width and padding for tablets and mobile screens */
+      .calculator {
+        width: 90%;  /* Take up 90% of the screen width */
+        padding: 10px; /* Reduce padding for smaller devices */
+      }
+
+      /* Adjust the display area size for mobile */
+      .display {
+        font-size: 20px; /* Smaller font size for mobile */
+        height: 40px; /* Smaller height for mobile */
+      }
+
+      /* Adjust button sizes */
+      button {
+        font-size: 16px; /* Smaller font size for buttons */
+        padding: 12px; /* Reduced padding for mobile */
+      }
+
+      /* Buttons will still remain in 4-column layout */
+      .buttons {
+        grid-template-columns: repeat(4, 1fr);  /* 4 columns layout */
+      }
+    }
+
+    /* Media Queries for Very Small Screens (Mobile Phones) */
+    @media screen and (max-width: 480px) {
+      /* Adjust display font size for very small screens */
+      .display {
+        font-size: 18px; /* Smaller font size for very small screens */
+      }
+
+      /* Further reduce button font size and padding */
+      button {
+        font-size: 14px; /* Smaller font size */
+        padding: 10px; /* Smaller padding */
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="calculator">
+    <input type="text" class="display" id="display" disabled>
+    <div class="buttons">
+      <button onclick="clearDisplay()" class="clear">C</button>
+      <button onclick="appendValue('(')" class="operator">(</button>
+      <button onclick="appendValue(')')" class="operator">)</button>
+      <button onclick="appendValue('/')" class="operator">÷</button>
+
+      <button onclick="appendValue('7')">7</button>
+      <button onclick="appendValue('8')">8</button>
+      <button onclick="appendValue('9')">9</button>
+      <button onclick="appendValue('*')" class="operator">×</button>
+
+      <button onclick="appendValue('4')">4</button>
+      <button onclick="appendValue('5')">5</button>
+      <button onclick="appendValue('6')">6</button>
+      <button onclick="appendValue('-')" class="operator">−</button>
+
+      <button onclick="appendValue('1')">1</button>
+      <button onclick="appendValue('2')">2</button>
+      <button onclick="appendValue('3')">3</button>
+      <button onclick="appendValue('+')" class="operator">+</button>
+
+      <button onclick="appendValue('0')">0</button>
+      <button onclick="appendValue('.')">.</button>
+      <button onclick="calculate()" class="equal">=</button>
+      <button onclick="appendValue('%')" class="operator">%</button>
+    </div>
+  </div>
+
+  <script>
+    // Add value to the display screen when a button is clicked
+    function appendValue(value) {
+      document.getElementById('display').value += value;
+    }
+
+    // Clear the display screen
+    function clearDisplay() {
+      document.getElementById('display').value = '';
+    }
+
+    // Evaluate the expression and display the result
+    function calculate() {
+      try {
+        document.getElementById('display').value = eval(document.getElementById('display').value);
+      } catch (e) {
+        alert("Invalid expression");
+      }
+    }
+  </script>
+
+</body>
+</html>
